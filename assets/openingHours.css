@@ -1,0 +1,83 @@
+#opening-hours .glyphicon {
+    vertical-align: middle;
+}
+
+#opening-hours .glyphicon-plus-sign {
+    color: #008000;
+    margin-left: 4px;
+}
+
+#opening-hours .glyphicon-remove-circle {
+    color: red;
+    margin-left: 8px;
+}
+
+#opening-hours .glyphicon-time,
+#opening-hours .glyphicon-cutlery {
+    margin-right: 2px;
+}
+
+#opening-hours .btn {
+    background: #fff;
+    border-color: #cccccc;
+    padding: 3px 8px;
+    box-shadow: 0 -4px 3px rgba(0,0,0,0.1) inset;
+    outline: none;
+}
+
+#opening-hours .btn.btn-info {
+    box-shadow: 0 4px 4px rgba(0,0,0,0.4) inset;
+    background: #31B0D5;
+}
+
+#opening-hours .form-control {
+    display: inline-block;
+    font-size: 12px;
+    width: auto;
+    height: 28px;
+    padding: 2px;
+}
+
+#opening-hours .opening-hours-block {
+    display: inline-block;
+    margin-bottom: 14px;
+    vertical-align: top;
+}
+
+#opening-hours .shirma {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    background: #fff;
+    left:0;
+    top: 0;
+}
+
+#opening-hours .opening-hours-block.time {
+    margin-left: 20px;
+    position: relative;
+}
+
+#opening-hours .opening-hours-block.time .inputs {
+    line-height: 28px;
+    margin-bottom: 2px;
+}
+
+#opening-hours .dotted {
+    display: inline-block;
+    font-size: 12px;
+    text-decoration: none;
+    border-bottom: 1px dotted;
+    margin: 2px 0;
+    line-height: 110%;
+    margin-right: 8px;
+    outline: none;
+}
+
+
+#opening-hours .link {
+    outline: none;
+    display: inline-block;
+    margin-top: 4px;
+}
