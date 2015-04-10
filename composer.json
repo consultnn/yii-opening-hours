@@ -1,0 +1,29 @@
+{
+	"name": "consultnn/yii2-opening-hours",
+	"description": "Yii2 opening hours extension",
+	"keywords": ["ConsultNN", "Yii2", "OpeningHours"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "ICC Ltd.",
+			"email": "tech@consultnn.ru",
+			"homepage": "http://consultnn.ru"
+		},
+		{
+			"name": "Artem Leksanov",
+			"email": "52lexanov@gmail.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"consultnn\\openingHours\\": "."
+		}
+	},
+	"support": {
+		"email": "tech@consultnn.ru"
+	}
+}
