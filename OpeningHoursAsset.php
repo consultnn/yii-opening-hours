@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\assets;
+namespace consultnn\openingHours;
 
 
 use yii\web\AssetBundle;
