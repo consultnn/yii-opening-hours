@@ -7,13 +7,13 @@ use yii\web\AssetBundle;
 
 class OpeningHoursAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $basePath = '@vendor/consultnn/yii2-opening-hours/assets';
+    //public $baseUrl = '@web';
     public $css = [
-        'assets/openingHours.css',
+        'openingHours.css',
     ];
     public $js = [
-        'assets/openingHours.js',
+        'openingHours.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
