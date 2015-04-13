@@ -4,17 +4,17 @@
 
 #opening-hours .glyphicon-plus-sign {
     color: #008000;
-    margin-left: 4px;
+    margin-left: 6px;
 }
 
 #opening-hours .glyphicon-remove-circle {
     color: red;
-    margin-left: 8px;
+    margin-left: 6px;
 }
 
 #opening-hours .glyphicon-time,
 #opening-hours .glyphicon-cutlery {
-    margin-right: 2px;
+    margin-right: 5px;
 }
 
 #opening-hours .btn {
@@ -23,6 +23,7 @@
     padding: 3px 8px;
     box-shadow: 0 -4px 3px rgba(0,0,0,0.1) inset;
     outline: none;
+    margin-right: 4px;
 }
 
 #opening-hours .btn.btn-info {
