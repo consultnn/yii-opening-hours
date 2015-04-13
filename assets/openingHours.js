@@ -172,9 +172,9 @@
                 };
 
                 if(range2_from[0] == 0 && range2_to[0] == 0) {
-                    controlData.time = Array.join(Array.concat(range1_from, range1_to, range2_from, range2_to), '-');
+                    controlData.time = Array.prototype.join(Array.prototype.concat(range1_from, range1_to, range2_from, range2_to), '-');
                 } else {
-                    controlData.time = Array.join(Array.concat(range1_from, range2_to, range1_to, range2_from), '-');
+                    controlData.time = Array.prototype.join(Array.prototype.concat(range1_from, range2_to, range1_to, range2_from), '-');
                     controlData.work_from = [range1_from[0], range1_from[1]];
                     controlData.work_to = [range2_to[0], range2_to[1]];
                     controlData.timeout = true;
