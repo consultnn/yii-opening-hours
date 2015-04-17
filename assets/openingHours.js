@@ -9,6 +9,7 @@
     var plugin = {
         container: null,
         control: null,
+        idPrefix: null,
 
         init: function() {
             var plugin = this;
@@ -88,6 +89,7 @@
         },
 
         fillHiddenInputs: function() {
+            var idPrefix = this.idPrefix;
             this.container.find('input[type="hidden"]').val(0);
 
             $.each(this.container.find('.control'), function() {
@@ -113,15 +115,15 @@
                 $.each(control.find('.btn-info'), function(){
                     var dayOfWeek = $(this).data('day-of-week');
 
-                    $('#company-schedule-'+dayOfWeek+'-0-from-hours').val(range1_from[0]);
-                    $('#company-schedule-'+dayOfWeek+'-0-from-minutes').val(range1_from[1]);
-                    $('#company-schedule-'+dayOfWeek+'-0-to-hours').val(range1_to[0]);
-                    $('#company-schedule-'+dayOfWeek+'-0-to-minutes').val(range1_to[1]);
+                    $('#'+idPrefix+dayOfWeek+'-0-from-hours').val(range1_from[0]);
+                    $('#'+idPrefix+dayOfWeek+'-0-from-minutes').val(range1_from[1]);
+                    $('#'+idPrefix+dayOfWeek+'-0-to-hours').val(range1_to[0]);
+                    $('#'+idPrefix+dayOfWeek+'-0-to-minutes').val(range1_to[1]);
 
-                    $('#company-schedule-'+dayOfWeek+'-1-from-hours').val(range2_from[0]);
-                    $('#company-schedule-'+dayOfWeek+'-1-from-minutes').val(range2_from[1]);
-                    $('#company-schedule-'+dayOfWeek+'-1-to-hours').val(range2_to[0]);
-                    $('#company-schedule-'+dayOfWeek+'-1-to-minutes').val(range2_to[1]);
+                    $('#'+idPrefix+dayOfWeek+'-1-from-hours').val(range2_from[0]);
+                    $('#'+idPrefix+dayOfWeek+'-1-from-minutes').val(range2_from[1]);
+                    $('#'+idPrefix+dayOfWeek+'-1-to-hours').val(range2_to[0]);
+                    $('#'+idPrefix+dayOfWeek+'-1-to-minutes').val(range2_to[1]);
                 });
             });
         },
@@ -129,6 +131,7 @@
         loadDataFromHiddenInputs: function() {
             var tempData = {};
             var container = this.container;
+            var plugin = this;
 
             $.each(this.container.find('input[type="hidden"]'), function(){
                 var reg = /[a-z0-9_\-]([a-z]{3})-(0|1)-(from|to)-(hours|minutes)/i;
@@ -148,6 +151,12 @@
                 }
 
                 tempData[day][dateType][action][numberType] = $(this).val();
+
+                if(!plugin.idPrefix) {
+                    var reg = /^([a-z0-9_\-]+-)[a-z]{3}-(0|1)-(from|to)-(hours|minutes)$/i;
+                    var matches = reg.exec($(this).attr('id'));
+                    plugin.idPrefix = matches[1];
+                }
             });
 
             var displayData = [];
