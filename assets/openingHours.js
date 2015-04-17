@@ -131,7 +131,7 @@
             var container = this.container;
 
             $.each(this.container.find('input[type="hidden"]'), function(){
-                var reg = /company-schedule-([a-z]{3})-(0|1)-(from|to)-(hours|minutes)/i;
+                var reg = /[a-z0-9_\-]([a-z]{3})-(0|1)-(from|to)-(hours|minutes)/i;
                 var matches = reg.exec($(this).attr('id'));
 
                 //var day = matches[1].charAt(0).toUpperCase() + matches[1].slice(1)
