@@ -10,6 +10,7 @@
         container: null,
         control: null,
         idPrefix: null,
+        maxControlItems: 7,
 
         init: function() {
             var plugin = this;
@@ -38,7 +39,13 @@
             });
 
             this.container.on('click', '.add-control-btn', function(event){
-                plugin.createControl();
+
+                if (plugin.container.find(".control").length < plugin.maxControlItems) {
+                    plugin.createControl();
+                } else {
+                    $(event.target).closest("a").hide();
+                }
+
                 return false;
             });
 
@@ -53,6 +60,9 @@
             this.container.on('click', '.remove-control-btn', function(event){
                 $(this).parent('.control').remove();
                 plugin.fillHiddenInputs();
+
+                plugin.container.find(".add-control-btn").show();
+
                 return false;
             });
 
