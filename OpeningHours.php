@@ -28,7 +28,7 @@ class OpeningHours extends Widget
     {
         OpeningHoursAsset::register($this->view);
 
-        $this->view->registerJs("$('#" . $this->getId() . ").openingHours();");
+        $this->view->registerJs("$('#" . $this->getId() . "').openingHours();");
 
         return parent::init();
     }
