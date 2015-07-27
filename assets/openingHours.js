@@ -15,7 +15,7 @@
         init: function() {
             var plugin = this;
 
-            plugin.addClass(plugin.pluginClass);
+            $(plugin.container).addClass(plugin.pluginClass);
 
             this.loadDataFromHiddenInputs();
 
