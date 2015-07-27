@@ -38,7 +38,11 @@
             });
 
             this.container.on('click', '.add-control-btn', function(event){
-                plugin.createControl();
+                if (plugin.container.find(".control").length < 7) {
+                    plugin.createControl();
+                } else {
+                    $(event.target).closest("a").hide();
+                }
                 return false;
             });
 
@@ -53,6 +57,8 @@
             this.container.on('click', '.remove-control-btn', function(event){
                 $(this).parent('.control').remove();
                 plugin.fillHiddenInputs();
+                plugin.container.find(".add-control-btn").show();
+
                 return false;
             });
 
