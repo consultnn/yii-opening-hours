@@ -10,9 +10,12 @@
         container: null,
         control: null,
         idPrefix: null,
+        pluginClass: "opening-hours",
 
         init: function() {
             var plugin = this;
+
+            plugin.addClass(plugin.pluginClass);
 
             this.loadDataFromHiddenInputs();
 
