@@ -2,7 +2,6 @@
 
 namespace consultnn\openingHours;
 
-use consultnn\openingHours\OpeningHoursAsset;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -15,14 +14,21 @@ use yii\helpers\Html;
 
 class OpeningHours extends Widget
 {
+    /**
+     * @var \yii\base\Model
+     */
     public $schedule;
+
+    /**
+     * @var \yii\widgets\ActiveForm
+     */
     public $form;
     
     public function init()
     {
         OpeningHoursAsset::register($this->view);
 
-        $this->view->registerJs("$('#opening-hours').openingHours();");
+        $this->view->registerJs("$('#" . $this->getId() . ").openingHours();");
 
         return parent::init();
     }
@@ -41,7 +47,7 @@ class OpeningHours extends Widget
 
         $content = '';
 
-        $content .= Html::beginTag('div', ['id' => 'opening-hours']);
+        $content .= Html::beginTag('div', ['id' => $this->getId()]);
         $content .= Html::beginTag('div', ['class' => 'control']);
 
         $content .= $this->renderButtons();

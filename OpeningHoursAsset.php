@@ -8,7 +8,7 @@ use yii\web\AssetBundle;
 class OpeningHoursAsset extends AssetBundle
 {
     public $sourcePath = '@vendor/consultnn/yii2-opening-hours/assets';
-    //public $baseUrl = '@web';
+
     public $css = [
         'openingHours.css',
     ];
