@@ -172,8 +172,8 @@
             for(var day in tempData) {
                 var range1_from = [tempData[day][0]['from'][0], tempData[day][0]['from'][1]];
                 var range1_to = [tempData[day][0]['to'][0], tempData[day][0]['to'][1]];
-                var range2_from = [tempData[day][1]['from'][0], tempData[day][0]['from'][1]];
-                var range2_to = [tempData[day][1]['to'][0], tempData[day][0]['to'][1]];
+                var range2_from = [tempData[day][1]['from'][0], tempData[day][1]['from'][1]];
+                var range2_to = [tempData[day][1]['to'][0], tempData[day][1]['to'][1]];
 
                 if(range1_from[0] == 0 && range1_to[0] == 0) {
                     continue;
