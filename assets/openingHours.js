@@ -12,6 +12,10 @@
         idPrefix: null,
         pluginClass: "opening-hours",
 
+        change: function() {
+            this.container.find('input:first').trigger('change');
+        },
+
         init: function() {
             var plugin = this;
 
@@ -54,6 +58,8 @@
                 plugin.container.find('.control:not(:first)').remove();
                 plugin.checkAvailableTimeControls();
 
+                plugin.change();
+
                 return false;
             });
 
@@ -61,6 +67,8 @@
                 $(this).parent('.control').remove();
                 plugin.fillHiddenInputs();
                 plugin.container.find(".add-control-btn").show();
+
+                plugin.change();
 
                 return false;
             });
@@ -72,6 +80,8 @@
                 parent.find('.work-from-minutes, .work-to-minutes').val(0);
 
                 plugin.fillHiddenInputs();
+
+                plugin.change();
 
                 return false;
             });
@@ -88,11 +98,16 @@
                     $(this).text('перерыв');
                 }
 
+                plugin.change();
+
                 return false;
             });
 
             this.container.on('change', 'select', function(event){
                 plugin.fillHiddenInputs();
+
+                plugin.change();
+
                 return false;
             });
         },
