@@ -2,34 +2,45 @@
  * Created by Leksanov Artem on 06.04.15.
  */
 
-"use strict";
+;(function ( $, window, document, undefined ) {
 
-(function($) {
+    "use strict";
 
-    var plugin = {
-        container: null,
-        control: null,
-        idPrefix: null,
-        pluginClass: "opening-hours",
+    var pluginName = "openingHours",
+        defaults = {
+            pluginClass : "opening-hours"
+        };
 
-        change: function() {
-            this.container.find('input:first').trigger('change');
-        },
+    function Plugin ( element, options ) {
+        this.element = $(element);
+        this.settings = $.extend( {}, defaults, options );
+        this._defaults = defaults;
+        this._name = pluginName;
+        this.control = null;
+        this.idPrefix = null;
 
+        var control = $(this.element).find('.control').clone();
+        control.find('.everyday-btn, .add-control-btn').remove();
+        this.control = control;
+
+        this.init();
+    }
+
+    $.extend(Plugin.prototype, {
         init: function() {
             var plugin = this;
 
-            $(plugin.container).addClass(plugin.pluginClass);
+            $(plugin.element).addClass(plugin.settings.pluginClass);
 
             this.loadDataFromHiddenInputs();
 
-            this.container.on('click', '.btn', function(event){
+            this.element.on('click', '.btn', function(event){
                 var index = $(this).index();
 
                 if($(this).hasClass('btn-info')){
                     $(this).removeClass('btn-info');
                 } else {
-                    $.each(plugin.container.find('.control .btn'), function(){
+                    $.each(plugin.element.find('.control .btn'), function(){
                         if($(this).index() == index){
                             $(this).removeClass('btn-info');
                         }
@@ -41,39 +52,44 @@
                 plugin.checkAvailableTimeControls();
                 plugin.fillHiddenInputs();
 
+                plugin.changeToggle();
+
                 return false;
             });
 
-            this.container.on('click', '.add-control-btn', function(event){
-                if (plugin.container.find(".control").length < 7) {
+            this.element.on('click', '.add-control-btn', function(event){
+                if (plugin.element.find(".control").length < 7) {
                     plugin.createControl();
                 } else {
                     $(event.target).closest("a").hide();
                 }
+
+                plugin.changeToggle();
+
                 return false;
             });
 
-            this.container.on('click', '.everyday-btn', function(event){
-                plugin.container.find('.btn').addClass('btn-info');
-                plugin.container.find('.control:not(:first)').remove();
+            this.element.on('click', '.everyday-btn', function(event){
+                plugin.element.find('.btn').addClass('btn-info');
+                plugin.element.find('.control:not(:first)').remove();
                 plugin.checkAvailableTimeControls();
 
-                plugin.change();
+                plugin.changeToggle();
 
                 return false;
             });
 
-            this.container.on('click', '.remove-control-btn', function(event){
+            this.element.on('click', '.remove-control-btn', function(event){
                 $(this).parent('.control').remove();
                 plugin.fillHiddenInputs();
-                plugin.container.find(".add-control-btn").show();
+                plugin.element.find(".add-control-btn").show();
 
-                plugin.change();
+                plugin.changeToggle();
 
                 return false;
             });
 
-            this.container.on('click', '.alltime-btn', function(event){
+            this.element.on('click', '.alltime-btn', function(event){
                 var parent = $(this).parent().parent('.control');
                 parent.find('.work-from-hours').val(0);
                 parent.find('.work-to-hours').val(24);
@@ -81,12 +97,12 @@
 
                 plugin.fillHiddenInputs();
 
-                plugin.change();
+                plugin.changeToggle();
 
                 return false;
             });
 
-            this.container.on('click', '.timeout-btn', function(event){
+            this.element.on('click', '.timeout-btn', function(event){
                 var timeOutBlock = $(this).parent().find('.timeout-block');
                 timeOutBlock.toggle();
 
@@ -98,25 +114,29 @@
                     $(this).text('перерыв');
                 }
 
-                plugin.change();
+                plugin.changeToggle();
 
                 return false;
             });
 
-            this.container.on('change', 'select', function(event){
+            this.element.on('change', 'select', function(event){
                 plugin.fillHiddenInputs();
 
-                plugin.change();
+                plugin.changeToggle();
 
                 return false;
             });
         },
 
+        changeToggle: function() {
+            this.element.find('input:first').trigger('change');
+        },
+
         fillHiddenInputs: function() {
             var idPrefix = this.idPrefix;
-            this.container.find('input[type="hidden"]').val(0);
+            this.element.find('input[type="hidden"]').val(0);
 
-            $.each(this.container.find('.control'), function() {
+            $.each(this.element.find('.control'), function() {
                 var control = $(this);
 
                 var work_from = [control.find('.work-from-hours').val(), control.find('.work-from-minutes').val()];
@@ -154,10 +174,10 @@
 
         loadDataFromHiddenInputs: function() {
             var tempData = {};
-            var container = this.container;
+            var element = this.element;
             var plugin = this;
 
-            $.each(this.container.find('input[type="hidden"]'), function(){
+            $.each(element.find('input[type="hidden"]'), function(){
                 var reg = /[a-z0-9_\-]([a-z]{3})-(0|1)-(from|to)-(hours|minutes)/i;
                 var matches = reg.exec($(this).attr('id'));
 
@@ -237,7 +257,7 @@
             }
 
             for(var i = 0; i < displayData.length; i++) {
-                var control = container.find('.control:eq('+i+')');
+                var control = element.find('.control:eq('+i+')');
                 if(!control.length) {
                     control = this.createControl();
                 }
@@ -270,7 +290,7 @@
          * Если ни один день недели не выбран, убирает возможность выбрать время. И наоборот
          */
         checkAvailableTimeControls: function(){
-            $.each(this.container.find('.control'), function(){
+            $.each(this.element.find('.control'), function(){
                 var shirma = $(this).find('.shirma');
                 if($(this).find('.btn-info').length){
                     shirma.hide();
@@ -279,7 +299,7 @@
                 }
             });
 
-            plugin.fillHiddenInputs();
+            this.fillHiddenInputs();
         },
 
         createControl: function() {
@@ -288,20 +308,18 @@
 
             control.find('.shirma').show();
 
-            this.container.append(control);
+            this.element.append(control);
 
             return control;
         }
+    });
+
+    $.fn[ pluginName ] = function ( options ) {
+        return this.each(function() {
+            if ( !$.data( this, "plugin_" + pluginName ) ) {
+                $.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
+            }
+        });
     };
 
-    $.fn.openingHours = function() {
-        plugin.container = $(this);
-
-        var control = $(this).find('.control').clone();
-        control.find('.everyday-btn, .add-control-btn').remove();
-        plugin.control = control;
-
-        plugin.init();
-    };
-
-})(jQuery);
+})( jQuery, window, document );
