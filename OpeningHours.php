@@ -77,17 +77,17 @@ class OpeningHours extends Widget
         $content .= Html::endTag('div');
 
         foreach ($this->schedule->getDays() as $day) {
-            $content .= $this->form->field($this->schedule, "{$day}[0][from][hours]", ['options' => ['class' => null]])->hiddenInput();
-            $content .= $this->form->field($this->schedule, "{$day}[0][from][minutes]", ['options' => ['class' => null]])->hiddenInput();
+            $content .= $this->form->field($this->schedule, "{$day}[0][from][hours]", ['options' => ['class' => null]])->hiddenInput()->label(false);
+            $content .= $this->form->field($this->schedule, "{$day}[0][from][minutes]", ['options' => ['class' => null]])->hiddenInput()->label(false);
 
-            $content .= $this->form->field($this->schedule, "{$day}[0][to][hours]", ['options' => ['class' => null]])->hiddenInput();
-            $content .= $this->form->field($this->schedule, "{$day}[0][to][minutes]", ['options' => ['class' => null]])->hiddenInput();
+            $content .= $this->form->field($this->schedule, "{$day}[0][to][hours]", ['options' => ['class' => null]])->hiddenInput()->label(false);
+            $content .= $this->form->field($this->schedule, "{$day}[0][to][minutes]", ['options' => ['class' => null]])->hiddenInput()->label(false);
 
-            $content .= $this->form->field($this->schedule, "{$day}[1][from][hours]", ['options' => ['class' => null]])->hiddenInput();
-            $content .= $this->form->field($this->schedule, "{$day}[1][from][minutes]", ['options' => ['class' => null]])->hiddenInput();
+            $content .= $this->form->field($this->schedule, "{$day}[1][from][hours]", ['options' => ['class' => null]])->hiddenInput()->label(false);
+            $content .= $this->form->field($this->schedule, "{$day}[1][from][minutes]", ['options' => ['class' => null]])->hiddenInput()->label(false);
 
-            $content .= $this->form->field($this->schedule, "{$day}[1][to][hours]", ['options' => ['class' => null]])->hiddenInput();
-            $content .= $this->form->field($this->schedule, "{$day}[1][to][minutes]", ['options' => ['class' => null]])->hiddenInput();
+            $content .= $this->form->field($this->schedule, "{$day}[1][to][hours]", ['options' => ['class' => null]])->hiddenInput()->label(false);
+            $content .= $this->form->field($this->schedule, "{$day}[1][to][minutes]", ['options' => ['class' => null]])->hiddenInput()->label(false);
         }
 
         $content .= Html::endTag('div');
